@@ -21,20 +21,27 @@ class Filmes(Base):
         return f"Filme [titulo={self.titulo}, ano={self.ano}]"
 
 #Insert
-data_insert = Filmes(titulo="Matilda", genero="Drama", ano=1996) #é um objeto da classe Filmes :o
+data_insert = Filmes(titulo="O assassino da serra elétrica", genero="Drama", ano=1996) #é um objeto da classe Filmes :o
 session.add(data_insert)
 session.commit() #manda pro banco de dados
 
+
 #Delete
-session.query(Filmes).filter(Filmes.titulo == "Dracula").delete()
+session.query(Filmes).filter(Filmes.titulo == "Matilda").delete()
 session.commit
+
+#Update
+session.query(Filmes).filter(Filmes.genero == "Drama").update({"ano":2000})
+session.commit()
 
 #SQL
 #Select
 data = session.query(Filmes).all() #essa query pega todos os elementos do banco relacionados relacionados à entidade Filmes
 print(data)
+'''
 print(data[1].titulo)
 print(data[0].ano, data[1].ano)
+'''
 
 session.close()
 
